@@ -206,6 +206,7 @@ LOGGING = {
 }
 
 # ==== 定时任务 ====
+# 每天 19:30 分爬取一次通告信息
 CRONJOBS = (
     ('30 19 * * *', 'notify.task.task_crawl_power_outage_info'),
 )
