@@ -51,6 +51,9 @@ def get_outage_info(show_browser=False):
         if result:
             notify_set.add((announcement_title, announcement_url))
 
+    # 关闭浏览器
+    driver.quit()
+
     return notify_set
 
 if __name__ == '__main__':
