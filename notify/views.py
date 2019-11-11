@@ -16,6 +16,6 @@ def add_subscriber(request):
         # 保存到数据库
         SubscriberInfoModel.add_subscriber(email=subscriber_email)
 
-        return JsonResponse({"code": "200", "img": "ok"})
+        return JsonResponse({"code": "200", "msg": "ok"})
     else:
         return HttpResponse(status=404)
