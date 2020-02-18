@@ -19,6 +19,8 @@ def get_outage_info(show_browser=False):
     if not show_browser:
         # Chrome 无头模式
         chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
     driver = webdriver.Chrome(options=chrome_options)
 
     # 获取后勤保障部通告通知的网页
@@ -55,6 +57,7 @@ def get_outage_info(show_browser=False):
     driver.quit()
 
     return notify_set
+
 
 if __name__ == '__main__':
     print(get_outage_info())
