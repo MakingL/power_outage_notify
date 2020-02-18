@@ -32,7 +32,7 @@ class SubscriberInfoModel(models.Model):
     """
     订阅者 的详细信息
     """
-    email = models.EmailField(verbose_name="订阅者邮箱", unique=True)
+    email = models.EmailField(verbose_name="订阅者邮箱", unique=True, primary_key=True)
     create_time = models.DateTimeField(verbose_name="创建时间", auto_now=True)
 
     def __str__(self):
