@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  app:
+    restart: always
+    build: .
+    command: bash -c "service cron start && gunicorn --timeout=30 --workers=1 --bind :9019 power_outage_notify.wsgi:application"
+    volumes:
+      - .:/code
+      - static-volume:/code/static
+    expose:
+      - "9019"
+    networks:
+      - web_network
+  nginx:
+    restart: always
+    image: nginx:latest
+    ports:
+      - "9089:80"
+    volumes:
+      - static-volume:/code/static
+      - ./conf/nginx:/etc/nginx/conf.d
+    depends_on:
+      - app
+    networks:
+      - web_network
+
+networks:
+  web_network:
+    driver: bridge
+
+volumes:
+  static-volume:
