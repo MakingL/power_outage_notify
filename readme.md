@@ -34,7 +34,22 @@
 
 ## 部署
 
-1. 部署前先在 power_outage_notify/settings.py 中编辑自己用于通知的邮箱
+### Docker 部署
+
+1. 部署前先在 power_outage_notify/settings.py （第127 行）中编辑自己用于通知的邮箱
+
+        # TODO: 请设置自己用于发邮件的邮箱, 设置自己的邮箱及授权码
+        # 自己的邮箱
+        EMAIL_HOST_USER = 'xxx@126.com'
+        # 自己的邮箱授权码，非密码
+        EMAIL_HOST_PASSWORD = 'xxxx'
+2. 构建并启动 Docker （当前目录下）: `docker-compose up`
+3. 创建后台管理员账号（可选，可不执行此步骤）： `docker exec -it powernotify_app_1 bash create_super_user.sh`
+4. 添加订阅者的邮箱， 浏览器中访问（请确保防火墙开放 9089 端口）: `http://服务器地址:9089/subscriber/add/?email=邮箱地址`
+
+### 手动配置
+
+1. 部署前先在 power_outage_notify/settings.py （第127 行）中编辑自己用于通知的邮箱
 
         # TODO: 请设置自己用于发邮件的邮箱, 设置自己的邮箱及授权码
         # 自己的邮箱
@@ -52,7 +67,7 @@
    （运行服务，此方式仅在单机测试环境使用，生产环境部署请使用 Nginx + wsgi
    方式运行）
 9. 进入 admin 后台，添加订阅者的邮箱 (后台管理地址，浏览器中访问: `http://服务器地址:服务监听的端口/admin/` )
-   
+
 ## 运行效果
 
 - 学校发布通知信息的网站
