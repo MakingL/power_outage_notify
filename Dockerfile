@@ -7,9 +7,11 @@ RUN mkdir /code
 WORKDIR /code
 COPY . /code
 
-RUN apt-get update && apt-get install -y python3 python3-pip cron chromium-chromedriver && \
+RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list && \
+    apt-get clean && \
+    apt-get update && apt-get install -y python3 python3-pip cron chromium-chromedriver && \
     ln -s /usr/bin/python3 /usr/bin/python && \
-    pip3 install -r requirement.txt && \
+    pip3 install  -i https://pypi.tuna.tsinghua.edu.cn/simple  -r requirement.txt && \
     python3 manage.py crontab add && \
     python3 manage.py makemigrations && \
     python3 manage.py migrate && \
