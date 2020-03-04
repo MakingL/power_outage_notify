@@ -10,6 +10,8 @@ services:
       - static-volume:/code/static
     expose:
       - "9019"
+    environment:
+      TZ: 'Asia/Shanghai'
     networks:
       - web_network
   nginx:
@@ -17,6 +19,8 @@ services:
     image: nginx:latest
     ports:
       - "9089:80"
+    environment:
+      TZ: 'Asia/Shanghai'
     volumes:
       - static-volume:/code/static
       - ./conf/nginx:/etc/nginx/conf.d
